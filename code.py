@@ -115,7 +115,6 @@ def modelleren():
         y += dy
         t += dt
         l.append([t, x, y])
-        print(l)
     writeCSV(l)
 
 
