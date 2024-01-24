@@ -1,4 +1,6 @@
 import math as m  # as zorgt ervoor dat ik enkel m hoef te typen ipv math
+import csv
+import os, sys
 def _hello(name: str):
     # het volgende kan ook met "Hello " + name, of met f"Hello {name}"
     print("Hello {0}".format(name))
@@ -92,6 +94,36 @@ def conditionals():
     else:
         print("This is the actual else!")
     print("This is *technically* an else as well!")
+    return
+
+
+def modelleren():
+    x = 0.35  #m
+    y = 2.32  #m
+    vx = 4.6  #m/s
+    vy = 5.4  #m/s
+    g = -9.81  #m/s/s
+    t = 0  #s
+    dt = 0.001  #s
+    l = [[t, x, y]]
+    while y <= 3.05 and vy > 0:
+        dx = vx * dt
+        x += dx
+        dvy = g * dt
+        vy += dvy
+        dy = vy * dt
+        y += dy
+        t += dt
+        l.append([t, x, y])
+        print(l)
+    writeCSV(l)
+
+
+def writeCSV(thing):
+    with open(os.path.join(sys.path[0], 'modelleren.csv'), 'w', newline='') as csvfile:
+        spamwriter = csv.writer(csvfile)
+        spamwriter.writerow(["t", "x", "y"])
+        spamwriter.writerows(thing)
 
 
 def main():
@@ -106,6 +138,7 @@ def main():
     containers()
     loops()
     conditionals()
+    modelleren()
 
 
 if __name__ == "__main__":
